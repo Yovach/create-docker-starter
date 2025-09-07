@@ -4,8 +4,6 @@
 name: Node.js Package
 
 on:
-  push:
-    branches: ["main"]
   release:
     types: [created]
 
@@ -23,6 +21,6 @@ jobs:
         working-directory: cli/
       - run: node --run build
         working-directory: cli/
-      # - run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
