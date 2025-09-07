@@ -1,41 +1,64 @@
 #!/usr/bin/env node
 
+import { isCancel, log } from "@clack/prompts";
+import { promptDirectory, promptTemplate } from "./prompts.ts";
 import { existsSync } from "node:fs";
 import { join as pathJoin } from "node:path";
-import { styleText } from "node:util";
-import prompts from "prompts";
 
-const response = await prompts([
-  {
-    type: "text",
-    name: "directory",
-    message: "In which folder do you want to create your project?",
-    validate: (text) =>
-      text.length >= 1
-        ? true
-        : styleText(["red"], "Please enter at least 1 character"),
-  },
-  {
-    type: "autocomplete",
-    name: "value",
-    choices: [
-      {
-        title: styleText(["bgBlue", "white"], " Node.js + TypeScript "),
-        value: "node",
-        description: "A Node.js project with TypeScript and Docker",
-      },
-    ],
-    message: "Which template do you want to use?",
-  },
-]);
+function handleSigTerm() {
+  return process.exit(0);
+}
 
-if (existsSync(pathJoin(response.directory))) {
-  console.error("This folder already exists");
+process.on("SIGINT", handleSigTerm);
+process.on("SIGTERM", handleSigTerm);
+
+function logCancel(): void {
+  log.error("Operation cancelled");
+}
+
+const directory = await promptDirectory();
+if (isCancel(directory)) {
+  logCancel();
+  process.exit()
+}
+
+const directoryAsString = directory.toString();
+
+if (existsSync(pathJoin(process.cwd(), directoryAsString))) {
+  log.error("This folder already exists");
   process.exit(1);
+}
+
+const template = await promptTemplate();
+if (isCancel(template)) {
+  logCancel();
+  process.exit();
 }
 
 const degit = await import("degit");
 const emitter = degit.default(
-  `yovach/create-docker-starter/templates/${response.value}`,
+  `yovach/create-docker-starter/templates/${template}`,
 );
-await emitter.clone(response.directory);
+try {
+  emitter.on("warn", (warn) => log.warn(warn.message));
+  await emitter.clone(directoryAsString);
+
+  const lines = [
+    `Project ${directoryAsString} created successfully!`,
+    `Follow these steps to get started:`,
+    `- cd ${directoryAsString}`,
+    `- make dev`,
+  ];
+
+  log.info(lines.join("\n"));
+} catch (err) {
+  if (err instanceof Error) {
+    log.error(
+      "Failed to create project " + directoryAsString + ": " + err.message,
+    );
+  } else {
+    log.error(
+      "Failed to create project " + directoryAsString + ": " + String(err),
+    );
+  }
+}
