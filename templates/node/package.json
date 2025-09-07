@@ -1,7 +1,8 @@
 {
   "name": "node",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "tsc"
   },
   "license": "MIT",
   "type": "module",
