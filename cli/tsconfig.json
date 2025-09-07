@@ -11,6 +11,10 @@
     "declaration": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "checkJs": false,
+    "allowJs": false,
+    "isolatedDeclarations": true
   }
 }
