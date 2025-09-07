@@ -15,7 +15,7 @@ A ready-to-use template for Node.js projects, including:
 
 ## Usage
 
-You can use our CLI `npm create-docker-starter@latest` to generate a new project.
+You can use our CLI `npm init docker-starter@latest` to generate a new project.
 
 Or you can :
 1. Clone this repository.
