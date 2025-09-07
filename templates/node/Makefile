@@ -4,4 +4,4 @@ dev:
 	docker compose -f compose.dev.yml up --build --watch
 
 prod:
-	docker compose -f compose.prod.yml up --build --watch
+	docker compose -f compose.yml up --build
