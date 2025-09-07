@@ -22,5 +22,6 @@ jobs:
       - run: node --run build
         working-directory: cli/
       - run: npm publish
+        working-directory: cli/
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
