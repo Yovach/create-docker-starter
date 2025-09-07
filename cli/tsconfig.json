@@ -1,0 +1,16 @@
+{
+  "extends": ["@tsconfig/strictest", "@tsconfig/node22", "@tsconfig/node-ts"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "target": "es2024",
+    "lib": ["es2024"],
+    "types": ["node"],
+
+    "declaration": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "noUncheckedSideEffectImports": true
+  }
+}
