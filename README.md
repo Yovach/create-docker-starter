@@ -1,6 +1,6 @@
 # Create Docker Starter
 
-A collection of boilerplates for quickly starting Node.js projects with Docker.
+A collection of templates for quickly starting Node.js projects with Docker.
 
 ## Available Templates
 
