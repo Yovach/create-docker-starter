@@ -1,0 +1,15 @@
+services:
+  node:
+    user: node
+    init: true
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: dev
+    develop:
+      watch:
+        - action: rebuild
+          path: package-lock.json
+        - action: sync
+          path: ./src
+          target: /app/src

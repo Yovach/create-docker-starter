@@ -2,7 +2,11 @@
   "name": "create-docker-starter",
   "version": "1.0.0",
   "description": "Create Node.js projets ready to use with Docker",
-  "keywords": ["node", "node.js", "docker"],
+  "keywords": [
+    "node",
+    "node.js",
+    "docker"
+  ],
   "homepage": "https://github.com/Yovach/create-docker-starter#readme",
   "bugs": {
     "url": "https://github.com/Yovach/create-docker-starter/issues"
@@ -12,5 +16,11 @@
     "url": "git+https://github.com/Yovach/create-docker-starter.git"
   },
   "license": "MIT",
-  "author": "yovach <contact@yovach.dev>"
+  "author": "yovach <contact@yovach.dev>",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  }
 }
