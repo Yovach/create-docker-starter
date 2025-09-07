@@ -18,6 +18,8 @@
     "declaration": false,
     "declarationMap": false,
     "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
