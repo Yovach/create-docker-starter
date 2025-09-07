@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { existsSync } from "node:fs";
 import { join as pathJoin } from "node:path";
 import { styleText } from "node:util";

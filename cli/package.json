@@ -1,7 +1,7 @@
 {
   "name": "create-docker-starter",
   "version": "1.0.1",
-  "main": "dist/main.js",
+  "bin": "dist/main.js",
   "description": "Create Node.js projets ready to use with Docker",
   "keywords": [
     "node",
