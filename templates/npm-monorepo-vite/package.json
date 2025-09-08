@@ -1,0 +1,10 @@
+{
+  "name": "npm-monorepo",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
