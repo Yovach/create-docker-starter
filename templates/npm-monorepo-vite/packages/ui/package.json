@@ -1,0 +1,22 @@
+{
+  "name": "@acme/ui",
+  "type": "module",
+  "scripts": {
+    "build": "tsdown"
+  },
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "tsdown": "^0.14.2",
+    "typescript": "^5.9.2"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  }
+}
