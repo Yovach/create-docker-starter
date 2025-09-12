@@ -22,6 +22,11 @@ export function promptTemplate(): Promise<symbol | "node"> {
         value: "node",
         hint: "A Node.js project with TypeScript and Docker",
       },
+      {
+        label: styleText(["magenta"], " Monorepo (NPM) with Vite, TypeScript and React "),
+        value: "npm-monorepo-vite",
+        hint: "A NPM monorepo project with Vite, TypeScript, React and Docker",
+      },
     ],
   });
 }
