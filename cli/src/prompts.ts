@@ -13,7 +13,7 @@ export function promptDirectory(): Promise<string | symbol> {
   });
 }
 
-export function promptTemplate(): Promise<symbol | "node"> {
+export function promptTemplate(): Promise<symbol | "node" | "npm-monorepo-vite"> {
   return select({
     message: "Which template do you want to use?",
     options: [
