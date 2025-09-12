@@ -16,8 +16,7 @@ FROM base AS dev
 RUN npm ci
 COPY --chown=1000:1000 . .
 
-RUN npm run --workspace=./packages/ui build
-
+RUN ["npm", "run", "--workspace=./packages/ui", "build"]
 CMD ["npm", "run", "--workspace=./apps/web", "dev", "--", "--host"]
 
 # Compile TypeScript to JavaScript
@@ -26,12 +25,10 @@ FROM base AS builder
 RUN npm ci
 COPY . .
 
-RUN ["npx", "tsc"]
+RUN npm run --workspace=./packages/ui build && \
+  npm run --workspace=./apps/web build
 
 # Production image
-FROM base AS prod
+FROM nginx:1.29.1-alpine AS prod
 
-RUN npm ci --omit dev
-COPY --from=builder /app/dist ./dist
-
-CMD ["node", "dist/main.js"]
+COPY --from=builder /app/apps/web/dist/ /usr/share/nginx/html
