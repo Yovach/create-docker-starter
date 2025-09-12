@@ -1,0 +1,19 @@
+services:
+  web:
+    user: node
+    init: true
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: dev
+    develop:
+      watch:
+        - action: rebuild
+          path: package-lock.json
+        - action: sync
+          path: ./apps/web
+          target: /app/apps/web
+        - action: rebuild
+          path: ./packages
+    ports:
+      - "5173:5173"
