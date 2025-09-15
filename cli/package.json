@@ -38,6 +38,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@clack/prompts": "^0.11.0"
+    "@clack/prompts": "^0.11.0",
+    "tar": "^7.4.3"
   }
 }
