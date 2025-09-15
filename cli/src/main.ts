@@ -4,7 +4,7 @@ import { isCancel, log } from "@clack/prompts";
 import { promptDirectory, promptTemplate } from "./prompts.ts";
 import { existsSync } from "node:fs";
 import { join as pathJoin } from "node:path";
-import { degit } from "./degit.ts";
+import { downloadAndExtractFile } from "./degit.ts";
 
 function handleSigTerm() {
   return process.exit(0);
@@ -36,12 +36,11 @@ if (isCancel(template)) {
   process.exit();
 }
 
-const emitter = await degit(
+await downloadAndExtractFile(
   `https://github.com/yovach/create-docker-starter`,
   `templates/${template}`,
   directoryAsString,
 );
-console.log(emitter);
 // try {
 //   emitter.on("warn", (warn) => log.warn(warn.message));
 //   await emitter.clone(directoryAsString);
