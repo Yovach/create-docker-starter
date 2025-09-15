@@ -20,7 +20,7 @@ function logCancel(): void {
 const directory = await promptDirectory();
 if (isCancel(directory)) {
   logCancel();
-  process.exit()
+  process.exit();
 }
 
 const directoryAsString = directory.toString();
@@ -37,7 +37,9 @@ if (isCancel(template)) {
 }
 
 const emitter = await degit(
-  `https://github.com/yovach/create-docker-starter`, `templates/${template}`,
+  `https://github.com/yovach/create-docker-starter`,
+  `templates/${template}`,
+  directoryAsString,
 );
 console.log(emitter);
 // try {
