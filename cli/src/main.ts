@@ -4,6 +4,8 @@ import { isCancel, log } from "@clack/prompts";
 import { promptDirectory, promptTemplate } from "./prompts.ts";
 import { existsSync } from "node:fs";
 import { join as pathJoin } from "node:path";
+import { readdir } from "node:fs/promises";
+import { styleText } from "node:util";
 import { downloadAndExtractFile } from "./degit.ts";
 
 function handleSigTerm() {
@@ -36,31 +38,22 @@ if (isCancel(template)) {
   process.exit();
 }
 
-await downloadAndExtractFile(
+const outputDestination = await downloadAndExtractFile(
   `https://github.com/yovach/create-docker-starter`,
   `templates/${template}`,
   directoryAsString,
 );
-// try {
-//   emitter.on("warn", (warn) => log.warn(warn.message));
-//   await emitter.clone(directoryAsString);
+const paths = await readdir(outputDestination);
+if (paths.length === 0) {
+  log.error("No files were found in the output directory");
+  process.exit(1);
+}
 
-//   const lines = [
-//     `Project ${directoryAsString} created successfully!`,
-//     `Follow these steps to get started:`,
-//     `- cd ${directoryAsString}`,
-//     `- make dev`,
-//   ];
+const lines = [
+  `Project "${styleText(["bold"], directoryAsString)}" created successfully!`,
+  `Follow these steps to get started:`,
+  `- cd ${directoryAsString}`,
+  `- make dev`,
+];
 
-//   log.info(lines.join("\n"));
-// } catch (err) {
-//   if (err instanceof Error) {
-//     log.error(
-//       "Failed to create project " + directoryAsString + ": " + err.message,
-//     );
-//   } else {
-//     log.error(
-//       "Failed to create project " + directoryAsString + ": " + String(err),
-//     );
-//   }
-// }
+log.info(lines.join("\n"));
