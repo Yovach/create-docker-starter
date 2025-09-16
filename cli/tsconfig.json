@@ -17,5 +17,5 @@
     "isolatedDeclarations": true,
     "noEmit": true
   },
-  "include": ["tsdown.config.ts", "src"]
+  "include": ["tsdown.config.ts", "eslint.config.ts", "src/**/*.ts"]
 }
