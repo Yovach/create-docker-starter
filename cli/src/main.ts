@@ -25,9 +25,7 @@ if (isCancel(directory)) {
   process.exit();
 }
 
-const directoryAsString = directory.toString();
-
-if (existsSync(pathJoin(process.cwd(), directoryAsString))) {
+if (existsSync(pathJoin(process.cwd(), directory))) {
   log.error("This folder already exists");
   process.exit(1);
 }
@@ -41,7 +39,7 @@ if (isCancel(template)) {
 const outputDestination = await downloadAndExtractFile(
   `https://github.com/yovach/create-docker-starter`,
   `templates/${template}`,
-  directoryAsString,
+  directory,
 );
 const paths = await readdir(outputDestination);
 if (paths.length === 0) {
@@ -50,9 +48,9 @@ if (paths.length === 0) {
 }
 
 const lines = [
-  `Project "${styleText(["bold"], directoryAsString)}" created successfully!`,
+  `Project "${styleText(["bold"], directory)}" created successfully!`,
   `Follow these steps to get started:`,
-  `- cd ${directoryAsString}`,
+  `- cd ${directory}`,
   `- make dev`,
 ];
 
