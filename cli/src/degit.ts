@@ -29,12 +29,18 @@ function extractArchiveBySelectingFolder(
   repositoryFolder: string,
 ): Unpack {
   const repositoryName = repository.split("/").at(-1);
+  if (repositoryName == null) {
+    throw new Error("Invalid repository name");
+  }
+
   return x({
     cwd: destinationFolder,
     strip: 3,
     strict: true,
     filter(path): boolean {
-      return path.startsWith(`${repositoryName}-${DEFAULT_GIT_BRANCH}/${repositoryFolder}`);
+      return path.startsWith(
+        `${repositoryName}-${DEFAULT_GIT_BRANCH}/${repositoryFolder}`,
+      );
     },
   });
 }
