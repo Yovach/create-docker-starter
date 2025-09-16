@@ -18,6 +18,15 @@ const config: Linter.Config[] = defineConfig([
   },
   js.configs.recommended,
   tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
+  {
+    rules: {
+      "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint/no-deprecated": "warn",
+      "max-params": "off",
+      "@typescript-eslint/max-params": "error",
+    },
+  },
 ]);
 
 export default config;
