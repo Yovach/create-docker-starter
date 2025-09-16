@@ -23,17 +23,17 @@
     "dist"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=20.19.0"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsdown"
   },
   "devDependencies": {
     "@tsconfig/node-ts": "^23.6.1",
-    "@tsconfig/node22": "^22.0.2",
+    "@tsconfig/node20": "^20.1.6",
     "@tsconfig/strictest": "^2.0.5",
     "@types/degit": "^2.8.6",
-    "@types/node": "^22.18.1",
+    "@types/node": "^20.19.15",
     "prettier": "^3.6.2",
     "tsdown": "^0.15.1",
     "typescript": "^5.9.2"

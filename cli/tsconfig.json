@@ -1,9 +1,10 @@
 {
-  "extends": ["@tsconfig/strictest", "@tsconfig/node22", "@tsconfig/node-ts"],
+  "extends": ["@tsconfig/strictest", "@tsconfig/node20", "@tsconfig/node-ts"],
   "compilerOptions": {
+    "module": "node20",
 
-    "target": "es2024",
-    "lib": ["es2024"],
+    "target": "es2020",
+    "lib": ["es2020"],
     "types": ["node"],
 
     "declaration": true,
