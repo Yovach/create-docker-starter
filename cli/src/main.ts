@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import { isCancel, log } from "@clack/prompts";
-import { promptDirectory, promptTemplate } from "./prompts.ts";
 import { existsSync } from "node:fs";
-import { join as pathJoin } from "node:path";
 import { readdir } from "node:fs/promises";
+import { join as pathJoin } from "node:path";
 import { styleText } from "node:util";
 import { downloadAndExtractFile } from "./degit.ts";
+import { promptDirectory, promptTemplate } from "./prompts.ts";
 
 function handleSigTerm() {
   return process.exit(0);

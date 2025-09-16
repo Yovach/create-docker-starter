@@ -13,7 +13,9 @@ export function promptDirectory(): Promise<string | symbol> {
   });
 }
 
-export function promptTemplate(): Promise<symbol | "node" | "npm-monorepo-vite"> {
+export function promptTemplate(): Promise<
+  symbol | "node" | "npm-monorepo-vite"
+> {
   return select({
     message: "Which template do you want to use?",
     options: [
@@ -23,7 +25,10 @@ export function promptTemplate(): Promise<symbol | "node" | "npm-monorepo-vite">
         hint: "A Node.js project with TypeScript and Docker",
       },
       {
-        label: styleText(["magenta"], " Monorepo (NPM) with Vite, TypeScript and React "),
+        label: styleText(
+          ["magenta"],
+          " Monorepo (NPM) with Vite, TypeScript and React ",
+        ),
         value: "npm-monorepo-vite",
         hint: "A NPM monorepo project with Vite, TypeScript, React and Docker",
       },

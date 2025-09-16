@@ -3,7 +3,8 @@ import { mkdir } from "node:fs/promises";
 import { join as pathJoin } from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
-import { Unpack, x } from "tar";
+import type { Unpack } from "tar";
+import { x } from "tar";
 
 const DEFAULT_GIT_BRANCH = "main";
 
