@@ -1,8 +1,6 @@
 {
   "extends": ["@tsconfig/strictest", "@tsconfig/node22", "@tsconfig/node-ts"],
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
 
     "target": "es2024",
     "lib": ["es2024"],
@@ -15,6 +13,8 @@
 
     "checkJs": false,
     "allowJs": false,
-    "isolatedDeclarations": true
-  }
+    "isolatedDeclarations": true,
+    "noEmit": true
+  },
+  "include": ["tsdown.config.ts", "src"]
 }
