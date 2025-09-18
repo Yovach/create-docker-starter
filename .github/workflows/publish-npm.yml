@@ -23,7 +23,7 @@ jobs:
         working-directory: cli/
       - run: npm run eslint-check
         working-directory: cli/
-      - run: node --run build
+      - run: npm run build
         working-directory: cli/
       - run: npm publish
         working-directory: cli/
