@@ -54,7 +54,7 @@ export async function downloadAndExtractFile(
   repositoryFolder: string,
   folder: string,
 ): Promise<string> {
-  const destinationFolder = pathJoin("output", folder);
+  const destinationFolder = pathJoin(folder);
   if (!existsSync(destinationFolder)) {
     await mkdir(destinationFolder, { recursive: true });
   }
