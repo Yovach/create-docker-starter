@@ -15,9 +15,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+        working-directory: cli/
+      - run: npm run prettier-check
+        working-directory: cli/
+      - run: npm run eslint-check
         working-directory: cli/
       - run: node --run build
         working-directory: cli/

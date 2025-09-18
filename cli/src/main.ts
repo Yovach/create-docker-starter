@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 import { isCancel, log } from "@clack/prompts";
-import { promptDirectory, promptTemplate } from "./prompts.ts";
 import { existsSync } from "node:fs";
+import { readdir } from "node:fs/promises";
 import { join as pathJoin } from "node:path";
+import { styleText } from "node:util";
+import { downloadAndExtractFile } from "./degit.ts";
+import { promptDirectory, promptTemplate } from "./prompts.ts";
 
 function handleSigTerm() {
   return process.exit(0);
@@ -19,12 +22,10 @@ function logCancel(): void {
 const directory = await promptDirectory();
 if (isCancel(directory)) {
   logCancel();
-  process.exit()
+  process.exit();
 }
 
-const directoryAsString = directory.toString();
-
-if (existsSync(pathJoin(process.cwd(), directoryAsString))) {
+if (existsSync(pathJoin(process.cwd(), directory))) {
   log.error("This folder already exists");
   process.exit(1);
 }
@@ -35,30 +36,22 @@ if (isCancel(template)) {
   process.exit();
 }
 
-const degit = await import("degit");
-const emitter = degit.default(
-  `yovach/create-docker-starter/templates/${template}`,
+const outputDestination = await downloadAndExtractFile(
+  `https://github.com/yovach/create-docker-starter`,
+  `templates/${template}`,
+  directory,
 );
-try {
-  emitter.on("warn", (warn) => log.warn(warn.message));
-  await emitter.clone(directoryAsString);
-
-  const lines = [
-    `Project ${directoryAsString} created successfully!`,
-    `Follow these steps to get started:`,
-    `- cd ${directoryAsString}`,
-    `- make dev`,
-  ];
-
-  log.info(lines.join("\n"));
-} catch (err) {
-  if (err instanceof Error) {
-    log.error(
-      "Failed to create project " + directoryAsString + ": " + err.message,
-    );
-  } else {
-    log.error(
-      "Failed to create project " + directoryAsString + ": " + String(err),
-    );
-  }
+const paths = await readdir(outputDestination);
+if (paths.length === 0) {
+  log.error("No files were found in the output directory");
+  process.exit(1);
 }
+
+const lines = [
+  `Project "${styleText(["bold"], directory)}" created successfully!`,
+  `Follow these steps to get started:`,
+  `- cd ${directory}`,
+  `- make dev`,
+];
+
+log.info(lines.join("\n"));
