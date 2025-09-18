@@ -50,7 +50,7 @@ if (paths.length === 0) {
 const lines = [
   `Project "${styleText(["bold"], directory)}" created successfully!`,
   `Follow these steps to get started:`,
-  `- cd ${directory}`,
+  `- cd ${outputDestination}`,
   `- make dev`,
 ];
 
